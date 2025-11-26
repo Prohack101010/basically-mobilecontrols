@@ -1,3 +1,2 @@
-🟥 Document for who doesn't know how to use controls
-🟥 Add Joystick
-🟥 Made Release
+🟥 Add Multiple Mobile Control ID Support
+🟥 Make Release
