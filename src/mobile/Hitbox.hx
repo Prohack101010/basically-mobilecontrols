@@ -18,8 +18,8 @@ class Hitbox extends MobileInputHandler
 {
 	public var instance:MobileInputHandler;
 	public var Hints:Array<MobileButton> = [];
-	public var getButtonIndexByName:Map<String, Int> = [];
-	public var getButtonByName:Map<String, MobileButton> = [];
+	public var getButtonIndexFromName:Map<String, Int> = [];
+	public var getButtonFromName:Map<String, MobileButton> = [];
 	public var globalAlpha:Float = 0.7;
 	public var buttonCameras(get, set):Array<FlxCamera>;
 
@@ -54,7 +54,8 @@ class Hitbox extends MobileInputHandler
 		var countedIndex:Int = 0;
 		for (buttonData in MobileInputHandler.hitboxModes.get(Mode).hints)
 		{
-			var buttonName:String = buttonData.buttonID;
+			var buttonName:String = buttonData.button;
+			var buttonIDs:Array<String> = buttonData.buttonIDs;
 			var buttonX:Float = buttonData.x;
 			var buttonY:Float = buttonData.y;
 
@@ -64,11 +65,11 @@ class Hitbox extends MobileInputHandler
 			var buttonColor = buttonData.color;
 			var buttonReturn = buttonData.returnKey;
 
-			var hint = createHint(buttonName, buttonX, buttonY, buttonWidth, buttonHeight, Util.colorFromString(buttonColor), buttonReturn);
+			var hint = createHint(buttonIDs, buttonX, buttonY, buttonWidth, buttonHeight, Util.colorFromString(buttonColor), buttonReturn);
 			Hints.push(hint);
 			add(hint);
-			getButtonByName.set(buttonName, hint);
-			getButtonIndexByName.set(buttonName, countedIndex);
+			getButtonFromName.set(buttonName, hint);
+			getButtonIndexFromName.set(buttonName, countedIndex);
 			countedIndex++;
 		}
 
@@ -76,14 +77,6 @@ class Hitbox extends MobileInputHandler
 		updateTrackedButtons();
 
 		instance = this;
-	}
-
-	/**
-	 * Clean up memory.
-	 */
-	override function destroy():Void
-	{
-		super.destroy();
 	}
 
 	private function createHintGraphic(Width:Int, Height:Int, Color:Int = 0xFFFFFF, ?isLane:Bool = false):BitmapData
@@ -109,7 +102,7 @@ class Hitbox extends MobileInputHandler
 		return bitmap;
 	}
 
-	private function createHint(Name:String, X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF, ?Return:String, ?Map:String):MobileButton
+	private function createHint(Name:Array<String>, X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF, ?Return:String, ?Map:String):MobileButton
 	{
 		var hint:MobileButton = new MobileButton(X, Y, Return);
 		hint.loadGraphic(createHintGraphic(Width, Height, Color));
@@ -118,7 +111,7 @@ class Hitbox extends MobileInputHandler
 		hint.immovable = true;
 		hint.scrollFactor.set();
 		hint.alpha = 0.00001;
-		hint.IDs = [Name];
+		hint.IDs = Name;
 		hint.onDown.callback = function()
 		{
 			if (hint.alpha != globalAlpha)

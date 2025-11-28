@@ -17,7 +17,7 @@ import openfl.utils.Assets;
  * A virtual thumbstick - useful for input on mobile devices.
  *
  * @author Ka Wing Chin
- * @modification author KralOyuncu2010x (ArkoseLabs) to make easier handling
+ * @modification author KralOyuncu2010x (ArkoseLabs) to make handling easier
  */
 class JoyStick extends FlxSpriteGroup
 {
@@ -127,6 +127,22 @@ class JoyStick extends FlxSpriteGroup
 	var easeSpeed:Float;
 
 	/**
+	 * The current size of JoyStick sprites.
+	 */
+	public var size(default, set):Float = 1;
+	function set_size(Value:Float) {
+		size = Value;
+		base.scale.set(Value, Value);
+		thumb.scale.set(Value, Value);
+
+		if (base != null && radius == 0)
+			radius = (base.width * 0.5) * Value;
+
+		zone.set(x - radius, y - radius, 2 * radius, 2 * radius);
+		return Value;
+	}
+
+	/**
 	 * Create a virtual thumbstick - useful for input on mobile devices.
 	 *
 	 * @param   X			The X-coordinate of the point in space.
@@ -146,9 +162,10 @@ class JoyStick extends FlxSpriteGroup
 
 		_point = FlxPoint.get();
 
-		createBase(Size);
-		createThumb(Size);
-		createZone(Size);
+		createBase();
+		createThumb();
+		createZone();
+		size = Size;
 
 		scrollFactor.set();
 		moves = false;
@@ -157,7 +174,7 @@ class JoyStick extends FlxSpriteGroup
 	/**
 	 * Creates the background of the analog stick.
 	 */
-	function createBase(Size:Float = 1):Void
+	function createBase():Void
 	{
 		base = new FlxSprite(0, 0);
 
@@ -173,7 +190,6 @@ class JoyStick extends FlxSpriteGroup
 			base.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData(pngFile), Assets.getText(xmlFile)).getByName('base')));
 
 		base.resetSizeFromFrame();
-		base.scale.set(Size, Size);
 		base.x += -base.width * 0.5;
 		base.y += -base.height * 0.5;
 		base.scrollFactor.set();
@@ -187,7 +203,7 @@ class JoyStick extends FlxSpriteGroup
 	/**
 	 * Creates the thumb of the analog stick.
 	 */
-	function createThumb(Size:Float = 1):Void
+	function createThumb():Void
 	{
 		thumb = new FlxSprite(0,0);
 
@@ -203,7 +219,6 @@ class JoyStick extends FlxSpriteGroup
 			thumb.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData(pngFile), Assets.getText(xmlFile)).getByName('thumb')));
 
 		thumb.resetSizeFromFrame();
-		thumb.scale.set(Size, Size);
 		thumb.x += -thumb.width * 0.5;
 		thumb.y += -thumb.height * 0.5;
 		thumb.scrollFactor.set();
@@ -218,10 +233,10 @@ class JoyStick extends FlxSpriteGroup
 	 * Creates the touch zone. It's based on the size of the background.
 	 * The thumb will react when the touch is in the zone.
 	 */
-	public function createZone(Size:Float = 1):Void
+	public function createZone():Void
 	{
 		if (base != null && radius == 0)
-			radius = (base.width * 0.5) * Size;
+			radius = base.width * 0.5;
 
 		zone.set(x - radius, y - radius, 2 * radius, 2 * radius);
 	}
@@ -433,7 +448,7 @@ class JoyStick extends FlxSpriteGroup
 	function get_up():Bool
 	{
 		if (!pressed) return false;
-		return Math.sin(inputAngle) < -deadZone.y;
+		return intensity > deadZone.y && (Math.sin(inputAngle) < -deadZone.y);
 	}
 	
 	/**
@@ -490,7 +505,7 @@ class JoyStick extends FlxSpriteGroup
 			case 'right':
 				return right;
 			default:
-				trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
+				//trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
 				return false;
 		}
 	}
@@ -516,7 +531,7 @@ class JoyStick extends FlxSpriteGroup
 			case 'right':
 				return right;
 			default:
-				trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
+				//trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
 				return false;
 		}
 	}
@@ -542,7 +557,7 @@ class JoyStick extends FlxSpriteGroup
 			case 'right':
 				return right;
 			default:
-				trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
+				//trace('Invalid direction: ' + Direction + '. Use: up, down, left, right');
 				return false;
 		}
 	}

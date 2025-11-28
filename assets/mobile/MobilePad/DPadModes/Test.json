@@ -1,7 +1,8 @@
 {
   "buttons": [
     {
-      "buttonID": "buttonUp",
+      "button": "buttonUp",
+      "buttonIDs": ["buttonUp"],
       "graphic": "up",
       "x": -75,
       "y": 260,
@@ -9,7 +10,8 @@
       "scale": 0.7
     },
     {
-      "buttonID": "buttonLeft",
+      "button": "buttonLeft",
+      "buttonIDs": ["buttonLeft"],
       "graphic": "left",
       "x": -150,
       "y": 340,
@@ -17,7 +19,8 @@
       "scale": 0.7
     },
     {
-      "buttonID": "buttonRight",
+      "button": "buttonRight",
+      "buttonIDs": ["buttonRight"],
       "graphic": "right",
       "x": 0,
       "y": 340,
@@ -25,7 +28,8 @@
       "scale": 0.7
     },
     {
-      "buttonID": "buttonDown",
+      "button": "buttonDown",
+      "buttonIDs": ["buttonDown"],
       "graphic": "down",
       "x": -75,
       "y": 420,

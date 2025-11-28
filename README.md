@@ -2,11 +2,12 @@
 
 ---
 
-a library for making easier to add `VirtualPad/MobilePad, Hitbox, JoyStick` into your game.
+A library for making easier to add Mobile Controls into your game.
 
 ---
 
 - [Setup](docs/SETUP.md)
+- [Features](docs/FEATURES.md)
 - [Usage](#usage)
 
 ---
@@ -78,11 +79,11 @@ class PlayState extends FlxState {
 		add(joyStick);
 	}
 	override function update(elapsed:Float) {
-		if (mobilePad.getButtonByName.get('buttonA').justPressed) {
+		if (mobilePad.getButtonFromName.get('buttonA').justPressed) {
 			trace('hello from buttonA');
 		}
 
-		if (hitbox.getButtonByName.get('buttonUp').justPressed) {
+		if (hitbox.getButtonFromName.get('buttonUp').justPressed) {
 			trace('hello from buttonUp');
 		}
 

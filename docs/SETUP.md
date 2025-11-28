@@ -12,7 +12,7 @@ For unstable versions however, use this
 haxelib git basically-mobilecontrols https://github.com/Prohack101010/basically-mobilecontrols
 ```
 
-Once this is done, go to your Project File, whether that be a build.hxml for Haxe Projects, or Project.xml for OpenFL and Flixel projects, and add `hscript-iris` to your libraries
+Once this is done, go to your Project File, whether that be a build.hxml for Haxe Projects, or Project.xml for OpenFL and Flixel projects, and add `basically-mobilecontrols` to your libraries
 
 ---
 
