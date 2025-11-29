@@ -62,6 +62,7 @@ class MobilePad extends MobileInputHandler {
 			var countedIndex:Int = 0;
 			for (buttonData in MobileInputHandler.dpadModes.get(DPad).buttons)
 			{
+				if (buttonData.scale == null) buttonData.scale = 1.0;
 				var buttonName:String = buttonData.button;
 				var buttonIDs:Array<String> = buttonData.buttonIDs;
 				var buttonGraphic:String = buttonData.graphic;
