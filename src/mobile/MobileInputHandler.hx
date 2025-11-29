@@ -198,5 +198,5 @@ typedef ButtonsData =
 	x:Float, // the button's X position on screen.
 	y:Float, // the button's Y position on screen.
 	color:String, // the button color, default color is white.
-	scale:Float //the button scale, default scale is 1.
+	scale:Null<Float> //the button scale, default scale is 1.
 }

@@ -89,6 +89,7 @@ class MobilePad extends MobileInputHandler {
 			var countedIndex:Int = 0;
 			for (buttonData in MobileInputHandler.actionModes.get(Action).buttons)
 			{
+				if (buttonData.scale == null) buttonData.scale = 1.0;
 				var buttonName:String = buttonData.button;
 				var buttonIDs:Array<String> = buttonData.buttonIDs;
 				var buttonGraphic:String = buttonData.graphic;
@@ -115,7 +116,7 @@ class MobilePad extends MobileInputHandler {
 		instance = this;
 	}
 
-	public function createVirtualButton(buttonIDs:Array<String>, x:Float, y:Float, framePath:String, ?scale:Float = 1, ?ColorS:Int = 0xFFFFFF):MobileButton {
+	public function createVirtualButton(buttonIDs:Array<String>, x:Float, y:Float, framePath:String, ?scale:Float = 1.0, ?ColorS:Int = 0xFFFFFF):MobileButton {
 		var frames:FlxGraphic;
 
 		final path:String = MobileInputHandler.mobileFolderPath + 'MobilePad/Textures/$framePath.png';
