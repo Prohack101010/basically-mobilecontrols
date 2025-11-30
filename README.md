@@ -23,11 +23,11 @@ Creating & Handling a mobile controls should be fairly easy and very much self-e
 // * src/Main.hx
 // *
 
-import mobile.MobileInputHandler;
+import mobile.MobileConfig;
 
 class Main {
 	static function main():Void {
-		MobileInputHandler.init('MobileControls', 'ArkoseLabs/HaxeTale', 'mobile/',
+		MobileConfig.init('MobileControls', 'ArkoseLabs/HaxeTale', 'mobile/',
 			[
 				'MobilePad/DPadModes',
 				'MobilePad/ActionModes',
@@ -79,11 +79,11 @@ class PlayState extends FlxState {
 		add(joyStick);
 	}
 	override function update(elapsed:Float) {
-		if (mobilePad.getButtonFromName.get('buttonA').justPressed) {
+		if (mobilePad.getButtonFromName('buttonA').justPressed) {
 			trace('hello from buttonA');
 		}
 
-		if (hitbox.getButtonFromName.get('buttonUp').justPressed) {
+		if (hitbox.getButtonFromName('buttonUp').justPressed) {
 			trace('hello from buttonUp');
 		}
 
