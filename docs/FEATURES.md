@@ -4,6 +4,8 @@
 - [x] MobilePad/VirtualPad
 - [x] Hitbox
 - [x] JoyStick
+- [x] TouchUtil
+- [x] SwipeUtil
 
 ---
 
@@ -12,6 +14,5 @@
 - [ ] Improved JoyStick
 - [ ] GyroScope Support
 - [ ] Json x HScript Support
-- [ ] TouchUtil?
 
 ---
